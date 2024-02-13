@@ -57,7 +57,7 @@ const SignUp = () => {
       toast.error('Error al registrar. Por favor, inténtalo de nuevo.');
     }
   };
-
+  
 
   return (
     <div className="book1">
