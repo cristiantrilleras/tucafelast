@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ const Login = () => {
     registered: false
   });
 
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -47,9 +48,18 @@ const Login = () => {
     }
   };
 
-  if (formData.registered) {
-    return <Perfil />;
-  }
+  useEffect(() => {
+    if (formData.registered) {
+      setTimeout(() => {
+        window.location.href = '/Perfil/Perfil';
+        // return <Perfil />;
+      }, 2000); // Redirigir después de 2 segundos
+    }
+  }, [formData.registered]);
+
+  // if (formData.registered) {
+  //   return <Perfil />;
+  // }
 
   return (
     <div className="book1">
