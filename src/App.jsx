@@ -23,6 +23,7 @@ import Login from "./LogIn";
 import SignUp from "./SingUp";
 import { useState } from "react";
 import Perfil from "./Components/Perfil/Perfil";
+import SignUpBusiness from "./SignUpBusiness/SignUpBusiness";
 
 
 
@@ -47,7 +48,8 @@ function App() {
         <Route path="/cafes/Deltorocafe" element={<Deltorocafe />} />
         <Route path="/cafes/GardenCafe" element={<GardenCafe />} />
         <Route path="/cafes/LaCabraLoca" element={<LaCabraLoca />}  />
-        <Route path="/Perfil/Perfil" element={<Perfil />} />
+        <Route path="/Perfil" element={<Perfil />} />
+        <Route path="/SignUpBusiness" element={<SignUpBusiness />} />
       </Routes>
       <Footer />
     </div>

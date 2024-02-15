@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Login from './LogIn';
 import './index.css';
 
 const SignUp = () => {
@@ -61,7 +60,7 @@ const SignUp = () => {
 
   return (
     <div className="book1">
-      <h2 className="heading">Registrar</h2>
+      <h2 className="heading">Registrar Usuario</h2>
       <form className='formL reserva-f' onSubmit={handleSubmit}>
         <label htmlFor="signupUsername" className="boxUS">
           Usuario:
@@ -107,6 +106,10 @@ const SignUp = () => {
         ¿Ya tienes una cuenta?{' '}
         <Link to="/login">
           <u><b>Inicia sesión aquí</b></u>
+        </Link>
+          <br />
+        <Link to="/SignUpBusiness">
+          <u><b>registra tu negocio aqui</b></u>
         </Link>
       </div>
       <ToastContainer position="bottom-right" autoClose={2000} />

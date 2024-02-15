@@ -58,10 +58,10 @@ const Perfil = () => {
 
         <li>
           <NavLink to="/login" className="btn-header">
-            Acceder
+            Cambiar usuario
           </NavLink>
           <NavLink to="/" className="btn-header">
-            LOGOUT
+            Salir
           </NavLink>
         </li>
 
@@ -129,7 +129,7 @@ const Perfil = () => {
 
       {/* " QUIENE SOMOS "" */}
 
-      <section className="review" id="review">
+      {/* <section className="review" id="review">
         <h1 className="heading">Opiniones <span>Lo que Dicen los Clientes</span></h1>
 
         <div className="swiper review-slider">
@@ -173,7 +173,7 @@ const Perfil = () => {
           </div>
           <div className="swiper-pagination"></div>
         </div>
-      </section>
+      </section> */}
 
       {/* en esta parte esta el codigo de reserva */}
 

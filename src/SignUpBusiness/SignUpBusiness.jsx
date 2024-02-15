@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './index.css';
-import Perfil from './Components/Perfil/Perfil';
 
-const Login = () => {
+
+const SignUpBusiness = () => {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
     registered: false
   });
 
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -23,53 +22,54 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = formData;
+    const { email, name, password } = formData;
     try {
-      const response = await fetch('http://localhost:8080/tuCafe/v1/client/login', {
+      const response = await fetch('http://localhost:8080/tuCafe/v1/client/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          name,
           email,
           password,
         }),
       });
 
       if (response.ok) {
-        toast.success('¡Inicio de sesión exitoso!');
+        toast.success('¡Registro de negocio exitoso! Redirigiendo al inicio de sesión.');
         setFormData({ ...formData, registered: true });
       } else {
-        toast.error('Inicio de sesión fallido. Verifica tus credenciales.');
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error('Error al conectar con el backend', error);
-      toast.error('Error al conectar con el backend');
+      toast.error('Error al registrar el negocio. Por favor, inténtalo de nuevo.');
     }
   };
 
-  useEffect(() => {
-    if (formData.registered) {
-      setTimeout(() => {
-        window.location.href = '/Perfil';
-        // return <Perfil />;
-      }, 2000); // Redirigir después de 2 segundos
-    }
-  }, [formData.registered]);
-
-  // if (formData.registered) {
-  //   return <Perfil />;
-  // }
-
   return (
     <div className="book1">
-      <h2 className="heading">Iniciar Sesión</h2>
+      <h2 className="heading">Registrar Negocio</h2>
       <form className='formL reserva-f' onSubmit={handleSubmit}>
-        <label htmlFor="loginEmail" className="boxUS">
-          Correo Electrónico:
+        <label htmlFor="businessName" className="boxUS">
+          Nombre del negocio:
           <input
             type="text"
-            id="loginEmail"
+            id="businessName"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="box1"
+          />
+        </label>
+
+        <label htmlFor="businessEmail" className="boxUS">
+          Correo electrónico del negocio:
+          <input
+            type="email"
+            id="businessEmail"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -77,11 +77,11 @@ const Login = () => {
           />
         </label>
 
-        <label htmlFor="loginPassword" className="boxUS">
-          Contraseña:
+        <label htmlFor="businessPassword" className="boxUS">
+          Contraseña del negocio:
           <input
             type="password"
-            id="loginPassword"
+            id="businessPassword"
             name="password"
             value={formData.password}
             onChange={handleChange}
@@ -90,20 +90,18 @@ const Login = () => {
         </label>
 
         <button type="submit" className="btn">
-          Iniciar Sesión
+          Registrar Negocio
         </button>
       </form>
       <div className='registro'>
-        ¿No tienes una cuenta?{' '}
-        <Link to="/signup">
-          <u><b>Regístrate aquí!</b></u>
+        ¿Ya tienes una cuenta de negocio?{' '}
+        <Link to="/login">
+          <u><b>Inicia sesión aquí</b></u>
         </Link>
       </div>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </div>
-
-    
   );
 };
 
-export default Login;
+export default SignUpBusiness;

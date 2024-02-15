@@ -17,7 +17,7 @@ function Header() {
                 <FontAwesomeIcon icon={faBars} />
             </button>
 
-            <a href="#" className="logo">
+            <a href="/" className="logo">
                 <FontAwesomeIcon icon={faMugHot} /> TuCafé
             </a>
         </div>
