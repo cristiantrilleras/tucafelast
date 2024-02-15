@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +11,14 @@ const SignUpBusiness = () => {
     password: '',
     registered: false
   });
+
+  useEffect(() => {
+    if (formData.registered) {
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000); // Redirigir después de 2 segundos
+    }
+  }, [formData.registered]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -2,34 +2,37 @@ import { cafes } from '../Conts/Conts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMugHot, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react'; // Importa el hook useState
-
+import { useState } from 'react';
+import './Perfil.css';
 
 
 const Perfil = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Estado para controlar si el usuario está logueado o no
-  
-  // Función para manejar el logout
   const handleLogout = () => {
-    // Aquí puedes realizar cualquier acción necesaria para cerrar la sesión, como limpiar tokens de autenticación o eliminar datos de sesión
-    // Por ahora, simplemente cambiamos el estado isLoggedIn a falso
+    // Aquí puedes realizar cualquier acción necesaria para cerrar la sesión
     setIsLoggedIn(false);
+    // Ocultar el pop-up después de cerrar sesión
+    setShowLogoutPopup(false);
   };
 
-
-  function handleClick() {
+  const handleClick = () => {
     const $bar = document.querySelector(".navbar")
     $bar.classList.toggle("open")
     $bar.classList.toggle("closed", $bar.classList.contains("open"))
-
   }
 
- 
-
-  
   return (
     <>
+      {showLogoutPopup && (
+        <div className="logout-popup">
+          <p>¿Estás seguro de que deseas cerrar sesión?</p>
+          <button onClick={handleLogout}>Sí, cerrar sesión</button>
+          <button onClick={() => setShowLogoutPopup(false)}>Cancelar</button>
+        </div>
+      )}
+
       <header className="header">
         <div>
           <button onClick={handleClick} id="menu-btn">
@@ -55,16 +58,17 @@ const Perfil = () => {
           </button>
         </div>
 
-
-        <li>
-          <NavLink to="/login" className="btn-header">
-            Cambiar usuario
-          </NavLink>
-          <NavLink to="/" className="btn-header">
-            Salir
-          </NavLink>
+      {/* Botones de registro y salida */}
+      <li>
+          <NavLink to="/SignUp" className="btn-header">Registro</NavLink>
+          {isLoggedIn ? (
+            <button className="btn-header" onClick={() => setShowLogoutPopup(true)}>Salir</button>
+          ) : (
+            <NavLink to="/login" className="btn-header">Iniciar sesión</NavLink>
+          )}
         </li>
 
+        
       </header>
 
       <section className="home" id="home">
@@ -123,59 +127,10 @@ const Perfil = () => {
         </div>
       </section>
 
-      {/* comentario de las personas */}
+  
 
       {/* antigua seccion about */}
 
-      {/* " QUIENE SOMOS "" */}
-
-      {/* <section className="review" id="review">
-        <h1 className="heading">Opiniones <span>Lo que Dicen los Clientes</span></h1>
-
-        <div className="swiper review-slider">
-          <div className="swiper-wrapper">
-            <div className="swiper-slide box">
-
-              <img src="https://res.cloudinary.com/dsa9qormp/image/upload/f_auto,q_auto/v1/image/iltlvdwpu7rfjsxhs78c" alt="" />
-              <div className="stars">
-
-              </div>
-              <p>sit amet, consectetur adipisicing elit. Quo, earum quis dolorem quaerat tenetur illum.</p>
-              <h3>John Doe</h3>
-              <span>Satisfied Client</span>
-            </div>
-
-            <div className="swiper-slide box">
-
-              <img src="https://res.cloudinary.com/dsa9qormp/image/upload/f_auto,q_auto/v1/image/ifdsxghyyadcpggqy1tm" alt="" />
-
-              <p>sit amet consectetur adipisicing elit. Rerum optio quasi ut, illo ipsam assumenda.</p>
-              <h3>John Doe</h3>
-              <span>Satisfied Client</span>
-            </div>
-
-            <div className="swiper-slide box">
-
-              <img src="https://res.cloudinary.com/dsa9qormp/image/upload/f_auto,q_auto/v1/image/fnstz7ftrcldpbfeu57r" alt="" />
-
-              <p>sit amet consectetur adipisicing elit. Eius asperiores aliquam hic quis! Eligendi, aliquam.</p>
-              <h3>John Doe</h3>
-              <span>Satisfied Client</span>
-            </div>
-
-            <div className="swiper-slide box">
-
-              <img src="https://res.cloudinary.com/dsa9qormp/image/upload/f_auto,q_auto/v1/image/yoc39uejzlse2uzfppxd" alt="" />
-              <p>sit amet consectetur adipisicing elit. Eligendi modi perspiciatis distinctio velit aliquid a.</p>
-              <h3>John Doe</h3>
-              <span>Satisfied Client</span>
-            </div>
-          </div>
-          <div className="swiper-pagination"></div>
-        </div>
-      </section> */}
-
-      {/* en esta parte esta el codigo de reserva */}
 
       <section className="book" id="book">
         <h1 className="heading">Reserva <span>tu lugar Favorito</span></h1>
